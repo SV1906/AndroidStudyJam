@@ -1,55 +1,90 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+import com.ml.quaterion.text2summary.Text2Summary;
+import java.util.Objects;
+import org.jetbrains.annotations.Nullable;
+//import kotlin.jvm.internal.Ref.ObjectRef;
+import java.lang.Object;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.BufferedReader;
+import java.io.File;
+import java.util.HashMap;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+public final class MainActivity extends AppCompatActivity {
+    @Nullable
+    private TextView TVSummary;
+    @Nullable
+    private Button button;
+    private HashMap _$_findViewCache;
+
+    @Nullable
+    public final TextView getTVSummary() {
+        return this.TVSummary;
+    }
+
+    public final void setTVSummary(@Nullable TextView var1) {
+        this.TVSummary = var1;
+    }
+
+    @Nullable
+    public final Button getButton() {
+        return this.button;
+    }
+
+    public final void setButton(@Nullable Button var1) {
+        this.button = var1;
+    }
+
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        this.setContentView(R.layout.activity_main);
+        View TextView =findViewById(R.id.textView);
+            this.TVSummary = (android.widget.TextView) TextView;
+            Button Button = findViewById(R.id.button);
+            String someLongText = "In word processing and desktop publishing, a hard return or paragraph break indicates a new paragraph, to be distinguished from the soft return at the end of a line internal to a paragraph. This distinction allows word wrap to automatically re-flow text as it is edited, without losing paragraph breaks. The software may apply vertical white space or indenting at paragraph breaks, depending on the selected style.";
+            final Object summary = new Object();
+            summary.() = Text2Summary.Companion.summarize(someLongText, 0.4F);
+            Button var10000 = this.button;
+            if (var10000 == null) {
+                Intrinsics.throwNpe();
             }
-        });
+
+            var10000.setOnClickListener((View.OnClickListener)(new View.OnClickListener() {
+                public final void onClick(View it) {
+                    TextView var10000 = MainActivity.this.getTVSummary();
+                    if (var10000 == null) {
+                        Intrinsics.throwNpe();
+                    }
+
+                    var10000.setText((CharSequence)((String)summary.));
+                }
+            }));
+        }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public View _$_findCachedViewById(int var1) {
+        if (this._$_findViewCache == null) {
+            this._$_findViewCache = new HashMap();
         }
 
-        return super.onOptionsItemSelected(item);
+        View var2 = (View)this._$_findViewCache.get(var1);
+        if (var2 == null) {
+            var2 = this.findViewById(var1);
+            this._$_findViewCache.put(var1, var2);
+        }
+
+        return var2;
+    }
+
+    public void _$_clearFindViewByIdCache() {
+        if (this._$_findViewCache != null) {
+            this._$_findViewCache.clear();
+        }
+
     }
 }
